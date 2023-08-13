@@ -1,12 +1,11 @@
 /babel.config.js
-/metro.config.js
+/example/babel.config.js
+/example/metro.config.js
 /.eslintrc.js
-/jest.config.js
-/jest.setup.js
+/example/jest.config.js
+/example/jest.setup.js
 /enzyme.setup.js
-/react-native.config.js
-/spectral/*
+/example/react-native.config.js
 /__mocks__
 /ios
 /android
-/scripts/*
