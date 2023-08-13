@@ -1,0 +1,12 @@
+/babel.config.js
+/metro.config.js
+/.eslintrc.js
+/jest.config.js
+/jest.setup.js
+/enzyme.setup.js
+/react-native.config.js
+/spectral/*
+/__mocks__
+/ios
+/android
+/scripts/*
