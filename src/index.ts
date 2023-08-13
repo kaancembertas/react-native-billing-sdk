@@ -7,6 +7,10 @@ export * from './constants';
 const BillingManager = NativeModules.BillingManager as IBillingSdkNative;
 const eventEmitter = new NativeEventEmitter(NativeModules.BillingManager);
 
+/**
+ *
+ * @returns undefined if platform is Android, otherwise Promise rejection
+ */
 const ensurePlatform = () => {
     if (Platform.OS === 'android') {
         return;
