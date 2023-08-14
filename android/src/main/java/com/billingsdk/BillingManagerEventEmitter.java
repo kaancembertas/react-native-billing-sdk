@@ -7,14 +7,22 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 public class BillingManagerEventEmitter {
-    private DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter;
+    private DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter = null;
+    private ReactContext context;
+
+    private DeviceEventManagerModule.RCTDeviceEventEmitter getEventEmitter (){
+      if(this.eventEmitter != null)
+        this.eventEmitter = context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+
+      return this.eventEmitter;
+    }
 
     public BillingManagerEventEmitter(ReactContext context){
-        eventEmitter = context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+      this.context = context;
     }
 
     public void sendEvent(String eventName, @Nullable WritableMap params){
-        eventEmitter.emit(eventName, params);
+        this.getEventEmitter().emit(eventName, params);
     }
 
     public void addListener(String eventName) {}
