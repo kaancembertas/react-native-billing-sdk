@@ -11,7 +11,7 @@ public class BillingManagerEventEmitter {
     private ReactContext context;
 
     private DeviceEventManagerModule.RCTDeviceEventEmitter getEventEmitter (){
-      if(this.eventEmitter != null)
+      if(this.eventEmitter == null)
         this.eventEmitter = context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
 
       return this.eventEmitter;
