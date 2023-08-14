@@ -4,7 +4,7 @@ import type { IBillingSdkNative, IBillingSdk } from './types';
 export * from './types';
 export * from './constants';
 
-const BillingManager = NativeModules.BillingManager as IBillingSdkNative;
+const BillingManager = NativeModules.BillingSdk as IBillingSdkNative;
 const eventEmitter = new NativeEventEmitter(NativeModules.BillingManager);
 
 /**
