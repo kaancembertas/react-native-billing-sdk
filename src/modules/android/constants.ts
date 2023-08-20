@@ -43,7 +43,7 @@ export enum ConnectionState {
     CLOSED = 3,
 }
 
-export enum BillingManagerEvent {
+export enum BillingSdkEvent {
     PURCHASE_UPDATED = 'billing-manager-purchase-updated',
     BILLING_SERVICE_DISCONNECTED = 'billing-manager-service-disconnected',
 }

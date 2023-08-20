@@ -73,7 +73,7 @@ export interface BillingSdkError extends Error {
     code: ResponseCode;
 }
 
-export interface IBillingSdkNative {
+export interface IBillingSdkAndroidNative {
     startConnection: () => Promise<void>;
     endConnection: () => Promise<void>;
     getConnectionState: () => Promise<ConnectionState>;
@@ -95,7 +95,7 @@ export type PurchaseUpdatedListener = (params: PurchaseUpdatedListenerParams) =>
 export type BillingServiceDisconnectedListener = () => void;
 export type RemoveListener = () => void;
 
-export interface IBillingSdk extends IBillingSdkNative {
+export interface IBillingSdkAndroid extends IBillingSdkAndroidNative {
     setPurchaseUpdatedListener: (listener: PurchaseUpdatedListener) => RemoveListener;
     setBillingServiceDisconnectedListener: (listener: BillingServiceDisconnectedListener) => RemoveListener;
 }
