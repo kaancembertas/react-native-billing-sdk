@@ -2,8 +2,8 @@
     "compilerOptions": {
         "baseUrl": "./",
         "paths": {
-            //"react-native-billing-sdk": ["./src/index"],
-            "react-native-billing-sdk/android": ["./src/modules/android"]
+            "react-native-billing-sdk": ["./src/index"],
+            "react-native-billing-sdk/android-module": ["./src/modules/android/index"]
         },
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
