@@ -29,6 +29,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,13 +114,13 @@ public class BillingSdk {
         promise.resolve(billingClient.getConnectionState());
     }
 
-    public void queryProductDetails (List<ProductDetailParams> productDetailParamsList, Promise promise) {
+    public void queryProductDetails (ArrayList<String> productIds, String productType, Promise promise) {
         List<QueryProductDetailsParams.Product> params = new ArrayList<>();
 
-        for (ProductDetailParams productDetailParams: productDetailParamsList) {
+        for (String productId: productIds) {
             params.add( QueryProductDetailsParams.Product.newBuilder()
-                    .setProductId(productDetailParams.productId)
-                    .setProductType(productDetailParams.productType)
+                    .setProductId(productId)
+                    .setProductType(productType)
                     .build());
         }
 

@@ -15,18 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BillingSdkConverter {
-    public static List<ProductDetailParams> convertArrayToProductDetailParamsList(ReadableArray jsonArray){
-        List<ProductDetailParams> productDetailParamsList = new ArrayList<>();
-
-        for(int i = 0; i < jsonArray.size(); i++){
-            ReadableMap map = jsonArray.getMap(i);
-            ProductDetailParams productDetailParams = new ProductDetailParams(map.getString("productId"), map.getString("productType"));
-            productDetailParamsList.add(productDetailParams);
-        }
-
-        return productDetailParamsList;
-    }
-
     private static ReadableArray stringListToArray (List<String> stringList){
         WritableArray array = new WritableNativeArray();
         for(String str: stringList) array.pushString(str);

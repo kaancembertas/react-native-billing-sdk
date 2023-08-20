@@ -9,6 +9,8 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.module.annotations.ReactModule;
 
+import java.util.ArrayList;
+
 @ReactModule(name = BillingSdkModule.NAME)
 public class BillingSdkModule extends ReactContextBaseJavaModule {
   public static final String NAME = "BillingSdk";
@@ -43,8 +45,14 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void queryProductDetails(ReadableArray productDetailParamsList, Promise promise) {
-    billingSdk.queryProductDetails(BillingSdkConverter.convertArrayToProductDetailParamsList(productDetailParamsList), promise);
+  public void queryProductDetails(ReadableArray productIds, String productType, Promise promise) {
+    ArrayList<String> productIdsList = new ArrayList<>();
+
+    for(int i=0; i<productIds.size(); i++){
+      productIdsList.add(productIds.getString(i));
+    }
+
+    billingSdk.queryProductDetails(productIdsList, productType, promise);
   }
 
   @ReactMethod
