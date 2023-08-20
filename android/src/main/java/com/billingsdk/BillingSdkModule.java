@@ -12,13 +12,13 @@ import com.facebook.react.module.annotations.ReactModule;
 @ReactModule(name = BillingSdkModule.NAME)
 public class BillingSdkModule extends ReactContextBaseJavaModule {
   public static final String NAME = "BillingSdk";
-  private BillingManager billingManager;
-  private BillingManagerEventEmitter eventEmitter;
+  private BillingSdk billingSdk;
+  private BillingSdkEventEmitter eventEmitter;
 
   public BillingSdkModule(ReactApplicationContext context) {
     super(context);
-    this.eventEmitter = new BillingManagerEventEmitter(context);
-    this.billingManager = new BillingManager(context, this.eventEmitter);
+    this.eventEmitter = new BillingSdkEventEmitter(context);
+    this.billingSdk = new BillingSdk(context, this.eventEmitter);
   }
 
   @Override
@@ -29,42 +29,42 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void startConnection (Promise promise){
-    billingManager.startConnection(promise);
+    billingSdk.startConnection(promise);
   }
 
   @ReactMethod
   public void endConnection (Promise promise){
-    billingManager.endConnection(promise);
+    billingSdk.endConnection(promise);
   }
 
   @ReactMethod
   public void getConnectionState(Promise promise){
-    billingManager.getConnectionState(promise);
+    billingSdk.getConnectionState(promise);
   }
 
   @ReactMethod
   public void queryProductDetails(ReadableArray productDetailParamsList, Promise promise) {
-    billingManager.queryProductDetails(BillingManagerConverter.convertArrayToProductDetailParamsList(productDetailParamsList), promise);
+    billingSdk.queryProductDetails(BillingSdkConverter.convertArrayToProductDetailParamsList(productDetailParamsList), promise);
   }
 
   @ReactMethod
   public void launchBillingFlow(String productId, String offerToken, Promise promise) {
-    billingManager.launchBillingFlow(productId, offerToken, promise);
+    billingSdk.launchBillingFlow(productId, offerToken, promise);
   }
 
   @ReactMethod
   public void acknowledgePurchase(String purchaseToken, Promise promise){
-    billingManager.acknowledgePurchase(purchaseToken, promise);
+    billingSdk.acknowledgePurchase(purchaseToken, promise);
   }
 
   @ReactMethod
   public void queryPurchaseHistory(String productType, Promise promise){
-    billingManager.queryPurchaseHistory(productType,promise);
+    billingSdk.queryPurchaseHistory(productType,promise);
   }
 
   @ReactMethod
   public void queryPurchases(String productType, Promise promise){
-    billingManager.queryPurchases(productType,promise);
+    billingSdk.queryPurchases(productType,promise);
   }
 
   @ReactMethod
@@ -79,6 +79,6 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void consume(String purchaseToken, Promise promise){
-    billingManager.consume(purchaseToken, promise);
+    billingSdk.consume(purchaseToken, promise);
   }
 }

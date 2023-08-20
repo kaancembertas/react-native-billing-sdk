@@ -32,13 +32,13 @@ import com.facebook.react.bridge.WritableNativeMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BillingManager {
+public class BillingSdk {
     private BillingClient billingClient;
     private ArrayList<ProductDetails> productDetailsList;
     private ReactApplicationContext context;
-    private BillingManagerEventEmitter eventEmitter;
+    private BillingSdkEventEmitter eventEmitter;
 
-    public BillingManager (ReactApplicationContext context, BillingManagerEventEmitter eventEmitter) {
+    public BillingSdk(ReactApplicationContext context, BillingSdkEventEmitter eventEmitter) {
         this.context = context;
         this.eventEmitter = eventEmitter;
         this.productDetailsList = new ArrayList<>();
@@ -58,11 +58,11 @@ public class BillingManager {
             json.putString("debugMessage", billingResult.getDebugMessage());
 
             if(responseCode == BillingClient.BillingResponseCode.OK && purchases != null)
-                json.putArray("purchases", BillingManagerConverter.convertPurchaseListToArray(purchases));
+                json.putArray("purchases", BillingSdkConverter.convertPurchaseListToArray(purchases));
             else
                 json.putNull("purchases");
 
-            eventEmitter.sendEvent(BillingManagerConstants.PURCHASE_UPDATED, json);
+            eventEmitter.sendEvent(BillingSdkConstants.PURCHASE_UPDATED, json);
         }
     };
 
@@ -99,7 +99,7 @@ public class BillingManager {
             public void onBillingServiceDisconnected() {
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
-                eventEmitter.sendEvent(BillingManagerConstants.BILLING_SERVICE_DISCONNECTED, null);
+                eventEmitter.sendEvent(BillingSdkConstants.BILLING_SERVICE_DISCONNECTED, null);
             }
         });
     }
@@ -134,7 +134,7 @@ public class BillingManager {
                     public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> result) {
                         if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
                             productDetailsList.addAll(result);
-                            promise.resolve(BillingManagerConverter.convertProductDetailsListToArray(result));
+                            promise.resolve(BillingSdkConverter.convertProductDetailsListToArray(result));
                             return;
                         }
 
@@ -158,7 +158,7 @@ public class BillingManager {
             Activity activity = context.getCurrentActivity();
 
         if(activity == null){
-            promise.reject(BillingManagerConstants.E_ACTIVITY_NULL, "getCurrentActivity returned null.");
+            promise.reject(BillingSdkConstants.E_ACTIVITY_NULL, "getCurrentActivity returned null.");
             return;
         }
 
@@ -166,7 +166,7 @@ public class BillingManager {
 
         ProductDetails productDetail = findProductDetailById(productId);
         if(productDetail == null){
-            promise.reject(BillingManagerConstants.E_PRODUCT_NOT_QUERIED, "The in app product or subscription must be queried before calling launchBillingFlow.");
+            promise.reject(BillingSdkConstants.E_PRODUCT_NOT_QUERIED, "The in app product or subscription must be queried before calling launchBillingFlow.");
             return;
         }
 
@@ -199,7 +199,7 @@ public class BillingManager {
                         promise.resolve(null);
                         return;
                     }
-                    promise.resolve(BillingManagerConverter.convertPurchaseHistoryRecordListToArray(purchaseHistoryList));
+                    promise.resolve(BillingSdkConverter.convertPurchaseHistoryRecordListToArray(purchaseHistoryList));
                     return;
                 }
                 promise.reject(String.valueOf(billingResult.getResponseCode()), billingResult.getDebugMessage());
@@ -214,7 +214,7 @@ public class BillingManager {
             @Override
             public void onQueryPurchasesResponse(@NonNull BillingResult billingResult, @NonNull List<Purchase> purchaseList) {
                 if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                    promise.resolve(BillingManagerConverter.convertPurchaseListToArray(purchaseList));
+                    promise.resolve(BillingSdkConverter.convertPurchaseListToArray(purchaseList));
                     return;
                 }
 

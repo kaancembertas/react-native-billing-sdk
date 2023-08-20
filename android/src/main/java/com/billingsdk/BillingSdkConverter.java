@@ -14,7 +14,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BillingManagerConverter {
+public class BillingSdkConverter {
     public static List<ProductDetailParams> convertArrayToProductDetailParamsList(ReadableArray jsonArray){
         List<ProductDetailParams> productDetailParamsList = new ArrayList<>();
 

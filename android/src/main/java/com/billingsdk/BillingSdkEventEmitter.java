@@ -6,7 +6,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class BillingManagerEventEmitter {
+public class BillingSdkEventEmitter {
     private DeviceEventManagerModule.RCTDeviceEventEmitter eventEmitter = null;
     private ReactContext context;
 
@@ -17,7 +17,7 @@ public class BillingManagerEventEmitter {
       return this.eventEmitter;
     }
 
-    public BillingManagerEventEmitter(ReactContext context){
+    public BillingSdkEventEmitter(ReactContext context){
       this.context = context;
     }
 
