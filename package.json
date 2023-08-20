@@ -41,7 +41,17 @@
     "keywords": [
         "react-native",
         "ios",
-        "android"
+        "android",
+        "in app purchase",
+        "in-app-purchase",
+        "Billing",
+        "iOS",
+        "Android",
+        "Amazon",
+        "Play",
+        "Billing Client",
+        "StoreKit",
+        "StoreKit 2"
     ],
     "repository": "https://github.com/kaancembertas/react-native-billing-sdk",
     "author": "Kaan Çembertaş <kaancembertas@gmail.com> (https://github.com/kaancembertas)",
