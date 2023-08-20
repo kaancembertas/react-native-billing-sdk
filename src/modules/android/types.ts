@@ -77,7 +77,7 @@ export interface IBillingSdkAndroidNative {
     startConnection: () => Promise<void>;
     endConnection: () => Promise<void>;
     getConnectionState: () => Promise<ConnectionState>;
-    queryProductDetails: (productIds: string, productType: ProductType) => Promise<ProductDetails[]>;
+    queryProductDetails: (productIds: string[], productType: ProductType) => Promise<ProductDetails[]>;
     launchBillingFlow: (productId: string, offerToken: string) => Promise<void>;
     acknowledgePurchase: (purchaseToken: string) => Promise<void>;
     queryPurchaseHistory: (productType: ProductType) => Promise<PurchaseHistoryRecord[] | null>;
