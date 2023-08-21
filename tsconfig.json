@@ -2,8 +2,7 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "react-native-billing-sdk": ["./src/index.ts"],
-            "react-native-billing-sdk/*": ["./src/*.ts"]
+            "react-native-billing-sdk": ["./src/index.ts"]
         },
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
@@ -25,7 +24,5 @@
         "strict": true,
         "target": "esnext",
         "verbatimModuleSyntax": false
-    },
-    "include": ["index.ts", "src/**/*"],
-    "exclude": ["node_modules", "dist"]
+    }
 }

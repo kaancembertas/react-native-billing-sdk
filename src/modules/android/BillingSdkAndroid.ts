@@ -1,16 +1,12 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
-import type {
-    BillingServiceDisconnectedListener,
-    IBillingSdkAndroid,
-    IBillingSdkAndroidNative,
-    PurchaseUpdatedListener,
-} from './types';
-import { BillingSdkEvent } from './constants';
+import { BillingSdkAndroidTypes } from './types';
+import { BillingSdkAndroidConstants } from './constants';
 
-const BillingSdk = NativeModules.BillingSdk as IBillingSdkAndroidNative;
+const { BillingSdkEvent } = BillingSdkAndroidConstants;
+const BillingSdk = NativeModules.BillingSdk as BillingSdkAndroidTypes.IBillingSdkAndroidNative;
 const eventEmitter = new NativeEventEmitter(NativeModules.BillingSdk);
 
-class BillingSdkAndroid implements IBillingSdkAndroid {
+class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
     private ensurePlatform = () => {
         if (Platform.OS === 'android') {
             return;
@@ -28,12 +24,14 @@ class BillingSdkAndroid implements IBillingSdkAndroid {
     public queryPurchases = this.ensurePlatform() ?? BillingSdk.queryPurchases;
     public consume = this.ensurePlatform() ?? BillingSdk.consume;
 
-    public setPurchaseUpdatedListener = (listener: PurchaseUpdatedListener) => {
+    public setPurchaseUpdatedListener = (listener: BillingSdkAndroidTypes.PurchaseUpdatedListener) => {
         const eventListener = eventEmitter.addListener(BillingSdkEvent.PURCHASE_UPDATED, listener);
         return eventListener.remove;
     };
 
-    public setBillingServiceDisconnectedListener = (listener: BillingServiceDisconnectedListener) => {
+    public setBillingServiceDisconnectedListener = (
+        listener: BillingSdkAndroidTypes.BillingServiceDisconnectedListener,
+    ) => {
         const eventListener = eventEmitter.addListener(BillingSdkEvent.BILLING_SERVICE_DISCONNECTED, listener);
         return eventListener.remove;
     };
