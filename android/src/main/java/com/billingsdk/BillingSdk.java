@@ -155,7 +155,7 @@ public class BillingSdk {
         return null;
     }
 
-    public void launchBillingFlow (String productId, String offerToken, Promise promise){
+    public void launchBillingFlow (String productId, @Nullable String offerToken, Promise promise){
             Activity activity = context.getCurrentActivity();
 
         if(activity == null){
@@ -172,8 +172,10 @@ public class BillingSdk {
         }
 
         builder.setProductDetails(productDetail);
-        builder.setOfferToken(offerToken);
 
+        if(offerToken != null){
+          builder.setOfferToken(offerToken);
+        }
 
         ImmutableList productDetailsParamsList = ImmutableList.of(builder.build());
 

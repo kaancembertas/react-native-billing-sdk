@@ -1,6 +1,7 @@
 package com.billingsdk;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -56,7 +57,7 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void launchBillingFlow(String productId, String offerToken, Promise promise) {
+  public void launchBillingFlow(String productId, @Nullable String offerToken, Promise promise) {
     billingSdk.launchBillingFlow(productId, offerToken, promise);
   }
 
