@@ -31,25 +31,26 @@ import com.facebook.react.bridge.WritableNativeMap;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BillingSdk {
-    private BillingClient billingClient;
-    private ArrayList<ProductDetails> productDetailsList;
-    private ReactApplicationContext context;
-    private BillingSdkEventEmitter eventEmitter;
+    private final BillingClient billingClient;
+    private final HashMap<String, ProductDetails> productDetailsList;
+    private final ReactApplicationContext context;
+    private final BillingSdkEventEmitter eventEmitter;
 
     public BillingSdk(ReactApplicationContext context, BillingSdkEventEmitter eventEmitter) {
         this.context = context;
         this.eventEmitter = eventEmitter;
-        this.productDetailsList = new ArrayList<>();
+        this.productDetailsList = new HashMap<>();
         this.billingClient = BillingClient.newBuilder(context)
                 .setListener(this.purchasesUpdatedListener)
                 .enablePendingPurchases()
                 .build();
     }
 
-    private PurchasesUpdatedListener purchasesUpdatedListener = new PurchasesUpdatedListener() {
+    private final PurchasesUpdatedListener purchasesUpdatedListener = new PurchasesUpdatedListener() {
         @Override
         public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
             WritableMap json = new WritableNativeMap();
@@ -134,9 +135,9 @@ public class BillingSdk {
                 new ProductDetailsResponseListener()  {
                     public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> result) {
                         if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                            productDetailsList.addAll(result);
-                            promise.resolve(BillingSdkConverter.convertProductDetailsListToArray(result));
-                            return;
+                          for(ProductDetails product: result) productDetailsList.put(product.getProductId(), product);
+                          promise.resolve(BillingSdkConverter.convertProductDetailsListToArray(result));
+                          return;
                         }
 
                         promise.reject(String.valueOf(billingResult.getResponseCode()), billingResult.getDebugMessage());
@@ -145,14 +146,12 @@ public class BillingSdk {
         );
     }
 
-    private ProductDetails findProductDetailById (String productId){
-        for(ProductDetails productDetail : productDetailsList){
-            if(productDetail.getProductId().equals(productId)){
-                return productDetail;
-            }
-        }
-
+    private @Nullable ProductDetails findProductDetailById (String productId){
+      if(!productDetailsList.containsKey(productId)){
         return null;
+      }
+
+      return productDetailsList.get(productId);
     }
 
     public void launchBillingFlow (String productId, @Nullable String offerToken, Promise promise){
