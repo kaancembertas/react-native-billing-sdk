@@ -31,7 +31,7 @@ export namespace BillingSdkAndroidConstants {
         SERVICE_DISCONNECTED = '-1',
         SERVICE_TIMEOUT = '-3',
         SERVICE_UNAVAILABLE = '2',
-        USER_CANCELED = '1',
+        USER_CANCELLED = '1',
 
         // SDK BRIDGE ERROR CODES
         E_ACTIVITY_NULL = '100',
