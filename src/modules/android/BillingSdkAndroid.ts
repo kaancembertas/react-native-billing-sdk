@@ -5,9 +5,11 @@ import { BillingSdkAndroidConstants } from './constants';
 const { BillingSdkEvent } = BillingSdkAndroidConstants;
 const BillingSdk = NativeModules.BillingSdk as BillingSdkAndroidTypes.IBillingSdkAndroidNative;
 const eventEmitter = new NativeEventEmitter(NativeModules.BillingSdk);
+
+const isAndroid = Platform.OS === 'android';
 class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
     private ensurePlatform = () => {
-        if (Platform.OS === 'android') {
+        if (isAndroid) {
             return;
         }
 
@@ -17,7 +19,6 @@ class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
     public endConnection = this.ensurePlatform() ?? BillingSdk.endConnection;
     public getConnectionState = this.ensurePlatform() ?? BillingSdk.getConnectionState;
     public queryProductDetails = this.ensurePlatform() ?? BillingSdk.queryProductDetails;
-    public launchBillingFlow = this.ensurePlatform() ?? BillingSdk.launchBillingFlow;
     public acknowledgePurchase = this.ensurePlatform() ?? BillingSdk.acknowledgePurchase;
     public queryPurchaseHistory = this.ensurePlatform() ?? BillingSdk.queryPurchaseHistory;
     public queryPurchases = this.ensurePlatform() ?? BillingSdk.queryPurchases;
@@ -33,6 +34,20 @@ class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
     ) => {
         const eventListener = eventEmitter.addListener(BillingSdkEvent.BILLING_SERVICE_DISCONNECTED, listener);
         return eventListener.remove;
+    };
+
+    public launchBillingFlow = async (
+        productId: string,
+        offerToken?: string,
+        oldPurchaseToken?: string,
+        subscriptionReplacementMode: BillingSdkAndroidConstants.SubscriptionReplacementMode = BillingSdkAndroidConstants
+            .SubscriptionReplacementMode.UNKNOWN_REPLACEMENT_MODE,
+    ): Promise<void> => {
+        if (!isAndroid) {
+            return Promise.reject('Unsupported platform.');
+        }
+
+        return BillingSdk.launchBillingFlow(productId, offerToken, oldPurchaseToken, subscriptionReplacementMode);
     };
 }
 

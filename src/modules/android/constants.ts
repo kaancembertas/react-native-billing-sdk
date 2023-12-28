@@ -23,6 +23,7 @@ export namespace BillingSdkAndroidConstants {
         DEFERRED = 6,
         WITHOUT_PRORATION = 3,
         WITH_TIME_PRORATION = 1,
+        UNKNOWN_REPLACEMENT_MODE = 0,
     }
 
     export enum ResponseCode {
