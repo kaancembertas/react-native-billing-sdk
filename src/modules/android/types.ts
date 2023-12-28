@@ -84,7 +84,12 @@ export namespace BillingSdkAndroidTypes {
             productIds: string[],
             productType: BillingSdkAndroidConstants.ProductType,
         ) => Promise<ProductDetails[]>;
-        launchBillingFlow: (productId: string, offerToken?: string) => Promise<void>;
+        launchBillingFlow: (
+            productId: string,
+            offerToken?: string,
+            oldPurchaseToken?: string,
+            subscriptionReplacementMode?: BillingSdkAndroidConstants.SubscriptionReplacementMode,
+        ) => Promise<void>;
         acknowledgePurchase: (purchaseToken: string) => Promise<void>;
         queryPurchaseHistory: (
             productType: BillingSdkAndroidConstants.ProductType,

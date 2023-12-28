@@ -375,7 +375,7 @@ PODS:
   - React-jsinspector (0.72.3)
   - React-logger (0.72.3):
     - glog
-  - react-native-billing-sdk (0.1.0):
+  - react-native-billing-sdk (0.2.18):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - React-NativeModulesApple (0.72.3):
@@ -693,7 +693,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 59d1eb03af7d30b7d66589c410f13151271e8006
   React-jsinspector: b511447170f561157547bc0bef3f169663860be7
   React-logger: c5b527272d5f22eaa09bb3c3a690fee8f237ae95
-  react-native-billing-sdk: d74d0c923386ffcaeb635ee7dffd44af7f26894d
+  react-native-billing-sdk: a5891debf7c55c5f64a0812d5a22d0cf9906358f
   React-NativeModulesApple: c57f3efe0df288a6532b726ad2d0322a9bf38472
   React-perflogger: 6bd153e776e6beed54c56b0847e1220a3ff92ba5
   React-RCTActionSheet: c0b62af44e610e69d9a2049a682f5dba4e9dff17
@@ -717,4 +717,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 96632995aafd39f2b6dd05cee70a32a0376bbf98
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.14.3

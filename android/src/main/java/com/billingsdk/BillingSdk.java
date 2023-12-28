@@ -154,13 +154,20 @@ public class BillingSdk {
       return productDetailsList.get(productId);
     }
 
-    public void launchBillingFlow (String productId, @Nullable String offerToken, Promise promise){
+    public void launchBillingFlow (
+      String productId,
+      @Nullable String offerToken,
+      @Nullable String oldPurchaseToken,
+      int subscriptionReplacementMode,
+      Promise promise){
             Activity activity = context.getCurrentActivity();
 
         if(activity == null){
             promise.reject(BillingSdkConstants.E_ACTIVITY_NULL, "getCurrentActivity returned null.");
             return;
         }
+
+      BillingFlowParams.SubscriptionUpdateParams.ReplacementMode.
 
         BillingFlowParams.ProductDetailsParams.Builder builder = BillingFlowParams.ProductDetailsParams.newBuilder();
 
@@ -178,9 +185,17 @@ public class BillingSdk {
 
         ImmutableList productDetailsParamsList = ImmutableList.of(builder.build());
 
-        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build();
+        BillingFlowParams.Builder billingFlowParamsBuilder = BillingFlowParams.newBuilder();
+        billingFlowParamsBuilder.setProductDetailsParamsList(productDetailsParamsList);
+
+        if(oldPurchaseToken != null && subscriptionReplacementMode != 0){
+          BillingFlowParams.SubscriptionUpdateParams.Builder subscriptionUpdateParamsBuilder = BillingFlowParams.SubscriptionUpdateParams.newBuilder();
+          subscriptionUpdateParamsBuilder.setOldPurchaseToken(oldPurchaseToken);
+          subscriptionUpdateParamsBuilder.setSubscriptionReplacementMode(subscriptionReplacementMode);
+          billingFlowParamsBuilder.setSubscriptionUpdateParams(subscriptionUpdateParamsBuilder.build());
+        }
+
+        BillingFlowParams billingFlowParams = billingFlowParamsBuilder.build();
 
         // Launch the billing flow
         BillingResult billingResult = billingClient.launchBillingFlow(activity, billingFlowParams);

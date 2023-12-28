@@ -17,6 +17,14 @@ export namespace BillingSdkAndroidConstants {
         PENDING = 2,
     }
 
+    export enum SubscriptionReplacementMode {
+        CHARGE_FULL_PRICE = 5,
+        CHARGE_PRORATED_PRICE = 2,
+        DEFERRED = 6,
+        WITHOUT_PRORATION = 3,
+        WITH_TIME_PRORATION = 1,
+    }
+
     export enum ResponseCode {
         // NATIVE RESPONSE CODES
         BILLING_UNAVAILABLE = '3',

@@ -5,7 +5,6 @@ import { BillingSdkAndroidConstants } from './constants';
 const { BillingSdkEvent } = BillingSdkAndroidConstants;
 const BillingSdk = NativeModules.BillingSdk as BillingSdkAndroidTypes.IBillingSdkAndroidNative;
 const eventEmitter = new NativeEventEmitter(NativeModules.BillingSdk);
-
 class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
     private ensurePlatform = () => {
         if (Platform.OS === 'android') {
