@@ -166,9 +166,7 @@ public class BillingSdk {
             promise.reject(BillingSdkConstants.E_ACTIVITY_NULL, "getCurrentActivity returned null.");
             return;
         }
-
-      BillingFlowParams.SubscriptionUpdateParams.ReplacementMode.
-
+        
         BillingFlowParams.ProductDetailsParams.Builder builder = BillingFlowParams.ProductDetailsParams.newBuilder();
 
         ProductDetails productDetail = findProductDetailById(productId);
