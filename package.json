@@ -1,7 +1,7 @@
 {
     "name": "react-native-billing-sdk",
-    "version": "0.3.2",
-    "description": "Implementation of Android Billing Client v6.0",
+    "version": "0.3.3",
+    "description": "Implementation of Android Billing Client v8.0",
     "main": "lib/commonjs/index",
     "module": "lib/module/index",
     "types": "lib/typescript/index.d.ts",
