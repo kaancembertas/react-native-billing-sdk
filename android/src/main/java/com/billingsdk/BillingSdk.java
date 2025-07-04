@@ -204,10 +204,7 @@ public class BillingSdk {
         promise.resolve(null);
     }
 
-    public void queryPurchaseHistory(String productType, Promise promise){
-        this.queryPurchases(productType, promise);
-    }
-
+   
     public void queryPurchases(String productType, Promise promise){
         QueryPurchasesParams params = QueryPurchasesParams.newBuilder().setProductType(productType).build();
 
