@@ -205,7 +205,7 @@ public class BillingSdk {
     }
 
     public void queryPurchaseHistory(String productType, Promise promise){
-       return this.queryPurchases(productType, promise);
+        this.queryPurchases(productType, promise);
     }
 
     public void queryPurchases(String productType, Promise promise){
