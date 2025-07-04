@@ -28,6 +28,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.android.billingclient.api.PendingPurchasesParams;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -46,7 +47,8 @@ public class BillingSdk {
         this.productDetailsList = new HashMap<>();
         this.billingClient = BillingClient.newBuilder(context)
                 .setListener(this.purchasesUpdatedListener)
-                .enablePendingPurchases()
+                .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+                .enableAutoServiceReconnection()
                 .build();
     }
 
