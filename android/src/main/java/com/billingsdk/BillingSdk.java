@@ -28,6 +28,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.android.billingclient.api.PendingPurchasesParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -46,7 +48,8 @@ public class BillingSdk {
         this.productDetailsList = new HashMap<>();
         this.billingClient = BillingClient.newBuilder(context)
                 .setListener(this.purchasesUpdatedListener)
-                .enablePendingPurchases()
+                .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+                .enableAutoServiceReconnection()
                 .build();
     }
 
@@ -133,13 +136,14 @@ public class BillingSdk {
         billingClient.queryProductDetailsAsync(
                 queryProductDetailsParams,
                 new ProductDetailsResponseListener()  {
-                    public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> result) {
+                    @Override
+                    public void onProductDetailsResponse(BillingResult billingResult, QueryProductDetailsResult result) {
+                        List<ProductDetails> productDetails = result.getProductDetailsList();
                         if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                          for(ProductDetails product: result) productDetailsList.put(product.getProductId(), product);
-                          promise.resolve(BillingSdkConverter.convertProductDetailsListToArray(result));
+                          for(ProductDetails product: productDetails) productDetailsList.put(product.getProductId(), product);
+                          promise.resolve(BillingSdkConverter.convertProductDetailsListToArray(productDetails));
                           return;
                         }
-
                         promise.reject(String.valueOf(billingResult.getResponseCode()), billingResult.getDebugMessage());
                     }
                 }
@@ -200,28 +204,7 @@ public class BillingSdk {
         promise.resolve(null);
     }
 
-    public void queryPurchaseHistory(String productType, Promise promise){
-        QueryPurchaseHistoryParams params = QueryPurchaseHistoryParams
-                .newBuilder()
-                .setProductType(productType)
-                .build();
-
-        billingClient.queryPurchaseHistoryAsync(params, new PurchaseHistoryResponseListener() {
-            @Override
-            public void onPurchaseHistoryResponse(@NonNull BillingResult billingResult, @Nullable List<PurchaseHistoryRecord> purchaseHistoryList) {
-                if(billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK){
-                    if(purchaseHistoryList == null){
-                        promise.resolve(null);
-                        return;
-                    }
-                    promise.resolve(BillingSdkConverter.convertPurchaseHistoryRecordListToArray(purchaseHistoryList));
-                    return;
-                }
-                promise.reject(String.valueOf(billingResult.getResponseCode()), billingResult.getDebugMessage());
-            }
-        });
-    }
-
+   
     public void queryPurchases(String productType, Promise promise){
         QueryPurchasesParams params = QueryPurchasesParams.newBuilder().setProductType(productType).build();
 

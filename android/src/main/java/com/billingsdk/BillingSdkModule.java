@@ -72,9 +72,22 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
     billingSdk.acknowledgePurchase(purchaseToken, promise);
   }
 
+  /**
+   * Queries and returns only the currently active purchases (owned by the user).
+   * Note: This does NOT return purchase history or consumed/expired purchases.
+   * Only active, unconsumed in-app products and active subscriptions are included.
+   *
+   * As of Google Play Billing Library 8.0.0, the queryPurchaseHistory() method has been removed.
+   * There is no direct alternative for retrieving purchase history; only active purchases can be queried.
+   * For more information, see:
+   * https://developer.android.com/google/play/billing/release-notes#summary-changes-8_0_0
+   *
+   * @param productType The type of product to query (e.g., inapp or subs).
+   * @param promise Promise to resolve with the list of active purchases.
+   */
   @ReactMethod
   public void queryPurchaseHistory(String productType, Promise promise){
-    billingSdk.queryPurchaseHistory(productType,promise);
+    billingSdk.queryPurchases(productType,promise);
   }
 
   @ReactMethod
