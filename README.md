@@ -3,15 +3,15 @@
 [![npm version](https://badge.fury.io/js/react-native-billing-sdk.svg)](https://badge.fury.io/js/react-native-billing-sdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A React Native library that exposes the native [Google Play Billing Library](https://developer.android.com/google/play/billing/integrate) functionality, implementing Android Billing Client v6.0 for handling in-app purchases and subscriptions.
+A React Native library that exposes the native [Google Play Billing Library](https://developer.android.com/google/play/billing/integrate) functionality, implementing the latest Android Billing Client v8.0 for handling in-app purchases and subscriptions.
 
-> **⚠️ Important:** By August 31, 2025, all new apps and updates must use Billing Library version 7 or newer. This library is built on v6.0 and will be updated to meet Google's requirements.
+> **✅ Latest Version:** This library uses Billing Library 8.0, which exceeds Google's requirement for version 7+ by the August 31, 2025 deadline and includes the latest features and security improvements.
 
 ## Features
 
 - 🛒 **One-Time Products** - Handle consumable and non-consumable in-app purchases
 - 🔄 **Subscriptions** - Complete subscription lifecycle with grace periods, hold states, and renewals
-- 📱 **Native Android Billing** - Direct access to Google Play Billing Library v6.0 APIs
+- 📱 **Latest Android Billing** - Direct access to Google Play Billing Library v8.0 APIs
 - 🎯 **TypeScript Support** - Full type safety with comprehensive TypeScript definitions
 - ⚡ **Real-Time Updates** - Purchase state changes and billing service events
 - 🔧 **Simple Integration** - React Native wrapper around native billing functionality
@@ -22,7 +22,7 @@ A React Native library that exposes the native [Google Play Billing Library](htt
 
 | Platform | Status |
 |----------|--------|
-| Android  | ✅ Full support (Billing Client v6.0) |
+| Android  | ✅ Full support (Billing Client v8.0) |
 | iOS      | ❌ Not implemented yet |
 
 ## Installation
@@ -35,22 +35,13 @@ yarn add react-native-billing-sdk
 
 ### Android Setup
 
-1. **Add Google Play Billing dependency** to your `android/app/build.gradle`:
-
-```gradle
-dependencies {
-    implementation 'com.android.billingclient:billing:6.0.1'
-    // ... other dependencies
-}
-```
-
-2. **Add BILLING permission** to your `android/app/src/main/AndroidManifest.xml`:
+1. **Add BILLING permission** to your `android/app/src/main/AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="com.android.vending.BILLING" />
 ```
 
-3. **Configure your app** in Google Play Console with in-app products/subscriptions.
+2. **Configure your app** in Google Play Console with in-app products/subscriptions.
 
 ### iOS Setup
 
@@ -436,7 +427,7 @@ You can test pending transactions using [license testing](https://developer.andr
 
 - React Native >= 0.60
 - Android API level 21+
-- Google Play Billing Library 6.0+
+- Google Play Billing Library 8.0+
 - Node.js >= 16.0.0
 
 ## License
