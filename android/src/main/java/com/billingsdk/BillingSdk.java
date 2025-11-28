@@ -164,7 +164,7 @@ public class BillingSdk {
       @Nullable String oldPurchaseToken,
       int subscriptionReplacementMode,
       @Nullable String obfuscatedAccountId,
-      @Nullable String obfuscatedProfileId
+      @Nullable String obfuscatedProfileId,
       Promise promise){
             Activity activity = context.getCurrentActivity();
 
