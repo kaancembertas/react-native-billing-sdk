@@ -163,6 +163,8 @@ public class BillingSdk {
       @Nullable String offerToken,
       @Nullable String oldPurchaseToken,
       int subscriptionReplacementMode,
+      @Nullable String obfuscatedAccountId,
+      @Nullable String obfuscatedProfileId
       Promise promise){
             Activity activity = context.getCurrentActivity();
 
@@ -189,6 +191,14 @@ public class BillingSdk {
 
         BillingFlowParams.Builder billingFlowParamsBuilder = BillingFlowParams.newBuilder();
         billingFlowParamsBuilder.setProductDetailsParamsList(productDetailsParamsList);
+
+        if(obfuscatedProfileId != null){
+            billingFlowParamsBuilder.setObfuscatedProfileId(obfuscatedProfileId);
+        }
+
+        if(obfuscatedAccountId != null){
+            billingFlowParamsBuilder.setObfuscatedProfileId(obfuscatedAccountId);
+        }
 
         if(oldPurchaseToken != null && subscriptionReplacementMode != 0){
           BillingFlowParams.SubscriptionUpdateParams.Builder subscriptionUpdateParamsBuilder = BillingFlowParams.SubscriptionUpdateParams.newBuilder();

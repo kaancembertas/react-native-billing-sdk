@@ -62,9 +62,11 @@ public class BillingSdkModule extends ReactContextBaseJavaModule {
     @Nullable String offerToken,
     @Nullable String oldPurchaseToken,
     int subscriptionReplacementMode,
+    @Nullable String obfuscatedAccountId,
+    @Nullable String obfuscatedProfileId,
     Promise promise
   ) {
-    billingSdk.launchBillingFlow(productId, offerToken, oldPurchaseToken, subscriptionReplacementMode, promise);
+    billingSdk.launchBillingFlow(productId, offerToken, oldPurchaseToken, subscriptionReplacementMode, obfuscatedAccountId, obfuscatedProfileId, promise);
   }
 
   @ReactMethod

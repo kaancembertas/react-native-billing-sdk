@@ -89,6 +89,8 @@ export namespace BillingSdkAndroidTypes {
             offerToken?: string,
             oldPurchaseToken?: string,
             subscriptionReplacementMode?: BillingSdkAndroidConstants.SubscriptionReplacementMode,
+            obfuscatedAccountId?: string,
+            obfuscatedProfileId?: string,
         ) => Promise<void>;
         acknowledgePurchase: (purchaseToken: string) => Promise<void>;
         queryPurchaseHistory: (

@@ -42,12 +42,21 @@ class BillingSdkAndroid implements BillingSdkAndroidTypes.IBillingSdkAndroid {
         oldPurchaseToken?: string,
         subscriptionReplacementMode: BillingSdkAndroidConstants.SubscriptionReplacementMode = BillingSdkAndroidConstants
             .SubscriptionReplacementMode.UNKNOWN_REPLACEMENT_MODE,
+        obfuscatedAccountId?: string,
+        obfuscatedProfileId?: string,
     ): Promise<void> => {
         if (!isAndroid) {
             return Promise.reject('Unsupported platform.');
         }
 
-        return BillingSdk.launchBillingFlow(productId, offerToken, oldPurchaseToken, subscriptionReplacementMode);
+        return BillingSdk.launchBillingFlow(
+            productId,
+            offerToken,
+            oldPurchaseToken,
+            subscriptionReplacementMode,
+            obfuscatedAccountId,
+            obfuscatedProfileId,
+        );
     };
 }
 
