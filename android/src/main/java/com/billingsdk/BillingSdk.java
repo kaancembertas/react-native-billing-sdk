@@ -197,7 +197,7 @@ public class BillingSdk {
         }
 
         if(obfuscatedAccountId != null){
-            billingFlowParamsBuilder.setObfuscatedProfileId(obfuscatedAccountId);
+            billingFlowParamsBuilder.setObfuscatedAccountId(obfuscatedAccountId);
         }
 
         if(oldPurchaseToken != null && subscriptionReplacementMode != 0){
